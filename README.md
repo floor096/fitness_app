@@ -1,16 +1,28 @@
-# fitness_app
+# App de Fitness para Patricio 🌟
 
-A new Flutter project.
+Aplicación móvil desarrollada en **Flutter**, enfocada en el bienestar físico y la motivación diaria.  
+Diseñada especialmente para **Patricio Estrella**, esta app combina ejercicios guiados, alarmas y seguimiento del progreso, con una interfaz moderna y una paleta de color rosa.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Funcionalidades principales
 
-A few resources to get you started if this is your first Flutter project:
+- 🧘‍♀️ **Biblioteca de ejercicios fáciles:** rutinas ilustradas y accesibles para todos los niveles.  
+- ⏰ **Alarmas personalizadas:** recordatorios para mantener la constancia en el entrenamiento.  
+- 📊 **Estadísticas:** seguimiento visual del peso, tiempo de ejercicio y progreso general.  
+- 💪 **Contador de ejercicios:** registro automático de repeticiones y tiempos.   
+- 📷 **Perfil y progreso:** sección para ver avances y fotos de antes/después.  
+- 🎯 **Recomendaciones y mensajes motivacionales** tras cada rutina.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tecnologías utilizadas
+
+- **Flutter**
+- **Dart**
+- **Material Design**
+- **Gráficos y componentes personalizados**
+
+---
+
+Proyecto académico.
