@@ -1,9 +1,19 @@
-// lib/main.dart
-import 'package:fitness_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
+
+Future<void> main() async {
+  // asegura que los widgets esten inicializados antes de Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // inicializa Firebase con la configuracion generada automaticamente
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 
@@ -20,7 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-

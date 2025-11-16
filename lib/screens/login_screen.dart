@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  // Metodo para login anonimo
+  Future<void> _loginAnonimo(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+      print("✅ Sesión anónima iniciada correctamente");
+
+      // Ir a la pantalla principal
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } catch (e) {
+      print("⚠️ Error al iniciar sesión anónima: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error al iniciar sesión")),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +75,12 @@ class LoginScreen extends StatelessWidget {
 
               const SizedBox(height: 50),
 
-              // Botón principal
+              // 🔹 Botón de inicio (login anónimo)
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // ⚡ Simula login directo
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
-                  },
+                  onPressed: () => _loginAnonimo(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink.shade400,
                     foregroundColor: Colors.white,

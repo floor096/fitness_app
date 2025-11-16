@@ -1,36 +1,55 @@
-// lib/screens/ejercicios_screen.dart
 import 'package:flutter/material.dart';
-import 'perfil_screen.dart';
-import 'home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/custom_bottom_nav.dart';
 
-
 class EjerciciosScreen extends StatefulWidget {
   @override
   _EjerciciosScreenState createState() => _EjerciciosScreenState();
 }
-
- /*
-
-class EjerciciosScreen extends StatefulWidget {
-  // 1. Definición de la propiedad de entrada (input)
-  final int levelId;
-
-  // 2. Constructor que requiere la propiedad
-  const EjerciciosScreen({
-    Key? key,
-    required this.levelId, // ¡Esto soluciona el error!
-  }) : super(key: key);
-
-  @override
-  _EjerciciosScreenState createState() => _EjerciciosScreenState();
-}
-
-
-  */
 
 class _EjerciciosScreenState extends State<EjerciciosScreen> {
-  int _selectedIndex = 1;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<Map<String, dynamic>> ejercicios = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarEjercicios();
+  }
+
+  Future<void> _cargarEjercicios() async {
+    try {
+      QuerySnapshot snapshot = await _firestore
+          .collection('ejercicios')
+          .orderBy('orden')
+          .get();
+
+      setState(() {
+        ejercicios = snapshot.docs.map((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          data['id'] = doc.id; // Agregar el id del documento
+          return data;
+        }).toList();
+        isLoading = false;
+      });
+
+      print('✅ ${ejercicios.length} ejercicios cargados');
+    } catch (e) {
+      print('❌ Error al cargar ejercicios: $e');
+      setState(() {
+        isLoading = false;
+      });
+
+      // mostrar mensaje al usuario
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error al cargar ejercicios'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +75,75 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white, size: 28),
+            icon: Icon(Icons.refresh, color: Colors.white, size: 28),
             onPressed: () {
-              _showSimpleDialog('🔍 Buscador', 'Aquí podrás buscar ejercicios');
+              setState(() {
+                isLoading = true;
+              });
+              _cargarEjercicios();
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: isLoading
+          ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(
+              color: Color(0xFFFF69B4),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Cargando ejercicios...',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey.shade600,
+              ),
+            ),
+          ],
+        ),
+      )
+          : ejercicios.isEmpty
+          ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('😢', style: TextStyle(fontSize: 80)),
+            SizedBox(height: 20),
+            Text(
+              'No hay ejercicios disponibles',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Agrega ejercicios en Firestore',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            SizedBox(height: 30),
+            ElevatedButton.icon(
+              onPressed: _cargarEjercicios,
+              icon: Icon(Icons.refresh),
+              label: Text('Reintentar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFF69B4),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 15,
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
+          : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -78,13 +158,10 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                   colors: [Color(0xFFFFD54F), Color(0xFFFFB74D)],
                 ),
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.orange.withOpacity(0.3),
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                  ),
-                ],
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFFFF9800), width: 5),
+                  right: BorderSide(color: Color(0xFFFF9800), width: 5),
+                ),
               ),
               child: Row(
                 children: [
@@ -95,7 +172,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '¡Bien hecho, PATRICIO!',
+                          '¡Bien hecho, Patricio!',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -119,78 +196,93 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
 
             SizedBox(height: 30),
 
-            // CATEGORÍAS DE EJERCICIOS
+            // CONTADOR DE EJERCICIOS
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Elige tu Ejercicio',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Elige tu Ejercicio',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFF69B4).withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      '${ejercicios.length} disponibles',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFFF69B4),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
             SizedBox(height: 20),
 
-            // CARDS DE CATEGORÍAS - MUY GRANDES
-            _buildBigCategoryCard(
-              '🏃 Cardio Súper Suave',
-              '5 minutos • Muy fácil',
-              Color(0xFF4DD0E1),
-              'https://drive.google.com/file/d/1ZVoQfApYpqOyZnHUDShf6p2WcTerxoCs/view?usp=sharing',
-            ),
-
-            _buildBigCategoryCard(
-              '🧘 Estiramientos',
-              '3 minutos • Para holgazanes',
-              Color(0xFF66BB6A),
-              'https://drive.google.com/file/d/1ZVoQfApYpqOyZnHUDShf6p2WcTerxoCs/view?usp=sharing',
-            ),
-
-            _buildBigCategoryCard(
-              '💪 Fuerza Básica',
-              '7 minutos • Sin pesas',
-              Color(0xFFFF7043),
-              'https://drive.google.com/file/d/1ZVoQfApYpqOyZnHUDShf6p2WcTerxoCs/view?usp=sharing',
-            ),
-/*
-            _buildBigCategoryCard(
-              '🌟 Bajo tu Roca',
-              '5 minutos • En casa',
-              Color(0xFFFFD54F),
-              'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500',
-            ),
-
- */
+            // LISTA DE EJERCICIOS DESDE FIRESTORE
+            ...ejercicios.map((ejercicio) {
+              return _buildBigCategoryCard(
+                ejercicio['emoji'] ?? '💪',
+                ejercicio['titulo'] ?? 'Sin título',
+                ejercicio['subtitulo'] ?? 'Sin descripción',
+                _parseColor(ejercicio['color']),
+                ejercicio['imagenUrl'] ?? '',
+              );
+            }).toList(),
 
             SizedBox(height: 100),
           ],
         ),
       ),
-
-      /* bottomNavigationBar: _buildBottomNav(),
-
-       */
-      bottomNavigationBar: CustomBottomNav(currentIndex: 1),  // 1 = Ejercicios
+      bottomNavigationBar: CustomBottomNav(currentIndex: 1),
     );
   }
 
-  Widget _buildBigCategoryCard(String title, String subtitle, Color color, String imageUrl) {
+  Color _parseColor(String? colorString) {
+    if (colorString == null || colorString.isEmpty) {
+      return Color(0xFFFF69B4); // Color por defecto
+    }
+
+    try {
+      // Convierte "#4DD0E1" a Color
+      return Color(int.parse(colorString.replaceFirst('#', '0xFF')));
+    } catch (e) {
+      return Color(0xFFFF69B4); // Color por defecto si falla
+    }
+  }
+
+  Widget _buildBigCategoryCard(
+      String emoji,
+      String title,
+      String subtitle,
+      Color color,
+      String imageUrl,
+      ) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       height: 160,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.3),
-            blurRadius: 15,
-            offset: Offset(0, 5),
-          ),
-        ],
+        border: Border(
+          bottom: BorderSide(color: color.withOpacity(0.5), width: 4),
+          right: BorderSide(color: color.withOpacity(0.5), width: 4),
+        ),
       ),
       child: Material(
         color: Colors.transparent,
@@ -201,22 +293,39 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
           },
           child: Row(
             children: [
-              // IMAGEN
+              // IMAGEN O EMOJI
               ClipRRect(
                 borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
                 child: Container(
                   width: 140,
                   height: double.infinity,
-                  child: Stack(
+                  child: imageUrl.isNotEmpty
+                      ? Stack(
                     fit: StackFit.expand,
                     children: [
                       Image.network(
                         imageUrl,
                         fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            color: color.withOpacity(0.2),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: color,
+                              ),
+                            ),
+                          );
+                        },
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: color.withOpacity(0.3),
-                            child: Icon(Icons.fitness_center, size: 50, color: Colors.white),
+                            child: Center(
+                              child: Text(
+                                emoji,
+                                style: TextStyle(fontSize: 60),
+                              ),
+                            ),
                           );
                         },
                       ),
@@ -233,6 +342,15 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                         ),
                       ),
                     ],
+                  )
+                      : Container(
+                    color: color.withOpacity(0.3),
+                    child: Center(
+                      child: Text(
+                        emoji,
+                        style: TextStyle(fontSize: 60),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -248,30 +366,32 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 8),
                       Text(
                         subtitle,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Colors.grey.shade600,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 12),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
                           color: color,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          '¡ EMPEZAR !',
+                          '¡EMPEZAR!',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -287,54 +407,6 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
       ),
     );
   }
-
-  /* Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onNavTap,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFFF69B4),
-        unselectedItemColor: Colors.grey,
-        selectedFontSize: 13,
-        unselectedFontSize: 12,
-        iconSize: 28,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
-            label: 'Ejercicios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            label: 'Alarmas',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: 'Stats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
-      ),
-    );
-  }
-
-   */
 
   void _showSimpleDialog(String title, String message) {
     showDialog(
