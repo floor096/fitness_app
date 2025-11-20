@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/custom_bottom_nav.dart';
+import 'ejercicio_detalle_screen.dart';
 
 class EjerciciosScreen extends StatefulWidget {
   @override
@@ -289,7 +290,17 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () {
-            _showSimpleDialog('🎉 ¡Genial!', 'Vamos a hacer: $title');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EjercicioDetalleScreen(
+                  ejercicio: ejercicios.firstWhere(
+                        (e) => e['titulo'] == title,
+                    orElse: () => {},
+                  ),
+                ),
+              ),
+            );
           },
           child: Row(
             children: [
@@ -408,6 +419,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
     );
   }
 
+  /*
   void _showSimpleDialog(String title, String message) {
     showDialog(
       context: context,
@@ -435,4 +447,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
       ),
     );
   }
+
+   */
+
 }
