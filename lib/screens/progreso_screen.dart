@@ -1,30 +1,3 @@
-/*import 'package:flutter/material.dart';
-
-class ProgresoScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Recompensas de Patricio'),
-        backgroundColor: Color(0xFFFF69B4), // Rosa Fuerte
-      ),
-      body: Center(
-        child: Text(
-          '¡Aquí verás todas tus Estrellas ⭐, Trofeos 🏆 y Racha de días!',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, color: Colors.grey.shade700),
-        ),
-      ),
-    );
-  }
-}
-
-
- */
-
-
-
-// lib/screens/progreso_screen.dart
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav.dart';
 
@@ -161,7 +134,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                             Text(
                               '$puntosActuales puntos',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
@@ -175,7 +148,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                   Text(
                     'Sigue subiendo, Patricio',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       color: Colors.white.withOpacity(0.9),
                     ),
                   ),
@@ -204,6 +177,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
 
                     SizedBox(height: 30),
 
+                    /*
                     // MENSAJE FINAL
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -242,7 +216,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                           ),
                         ],
                       ),
-                    ),
+                    ), */
 
                     SizedBox(height: 100),
                   ],
@@ -273,8 +247,8 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
           Column(
             children: [
               Container(
-                width: esActual ? 100 : 80,
-                height: esActual ? 100 : 80,
+                width: esActual ? 80 : 80,
+                height: esActual ? 80 : 80,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: bloqueado
@@ -342,7 +316,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
             ],
           ),
 
-          SizedBox(width: 20),
+          SizedBox(width: 8),
 
           // CARD CON INFO
           Expanded(
@@ -372,7 +346,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                         child: Text(
                           nivel['titulo'],
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: bloqueado ? Colors.grey.shade600 : Colors.black87,
                           ),
@@ -388,7 +362,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                           child: Text(
                             '+${nivel['puntos']} pts',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: colorPrincipal,
                             ),
@@ -400,7 +374,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                   Text(
                     nivel['subtitulo'],
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 18,
                       color: bloqueado ? Colors.grey.shade500 : Colors.grey.shade700,
                     ),
                   ),
@@ -414,7 +388,7 @@ class _ProgresoScreenState extends State<ProgresoScreen> {
                         Text(
                           '¡Completado!',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4CAF50),
                           ),

@@ -1,576 +1,3 @@
-/*
-// lib/screens/home_screen.dart
-import 'package:flutter/material.dart';
-import 'ejercicios_screen.dart';
-import 'perfil_screen.dart';
-import '../widgets/custom_bottom_nav.dart';
-
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-
-  /*void _onNavTap(int index) {
-    if (index == _selectedIndex) return;
-
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    Widget screen;
-    switch (index) {
-      case 1:
-        screen = EjerciciosScreen();
-        break;
-      case 4:
-        screen = PerfilScreen();
-        break;
-      default:
-        return;
-    }
-
-    Navigator.pushReplacement(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, anim1, anim2) => screen,
-        transitionDuration: Duration.zero,
-      ),
-    );
-  }
-
-   */
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFFF5F7),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // HEADER CON SALUDO
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '¡Hola Patricio!',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          'Hoy es un buen día para ejercitar',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey.shade600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.pink.withOpacity(0.3),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: IconButton(
-                        icon: Icon(Icons.notifications, color: Color(0xFFFF69B4), size: 28),
-                        onPressed: () {
-                          _showSimpleDialog('🔔 Notificaciones', 'No tienes nuevas notificaciones');
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 30),
-
-                // CARD DE MOTIVACIÓN GRANDE
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xFFFF69B4), Color(0xFFE91E63)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.pink.withOpacity(0.4),
-                        blurRadius: 15,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text('🌟', style: TextStyle(fontSize: 40)),
-                          SizedBox(width: 15),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '¡Llevas 5 días seguidos!',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  'Eres una estrella de mar campeona',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white.withOpacity(0.9),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Text('🔥', style: TextStyle(fontSize: 20)),
-                          Text('🔥', style: TextStyle(fontSize: 20)),
-                          Text('🔥', style: TextStyle(fontSize: 20)),
-                          Text('🔥', style: TextStyle(fontSize: 20)),
-                          Text('🔥', style: TextStyle(fontSize: 20)),
-                          SizedBox(width: 10),
-                          Text(
-                            '5 DÍAS',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: 30),
-
-                // SECCIÓN HOY
-                Text(
-                  'Ejercicio de Hoy',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-
-                SizedBox(height: 15),
-
-                // CARD DE EJERCICIO SUGERIDO - MUY GRANDE
-                Container(
-                  width: double.infinity,
-                  height: 230,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 15,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(25),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => EjerciciosScreen()),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFF66BB6A).withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-
-                                    child: Text(
-                                      'RECOMENDADO',
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF66BB6A),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 12),
-                                  Text(
-                                    'Estiramientos\nMatutinos',
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                      height: 1.2,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.access_time, size: 16, color: Colors.grey),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        '5 minutos',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                      SizedBox(width: 15),
-                                      Icon(Icons.favorite, size: 16, color: Colors.pink),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        'Fácil',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 15),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFF69B4),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Text(
-                                      '¡EMPEZAR AHORA!',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 15),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                'https://ih1.redbubble.net/image.3791362301.1816/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg',
-                                width: 150,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    width: 100,
-                                    color: Color(0xFFFFB6D9),
-                                    child: Icon(Icons.star_half, size: 50, color: Colors.white),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 30),
-
-                // TUS STATS - SIMPLE
-                Text(
-                  'Mi Progreso',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-
-                SizedBox(height: 15),
-
-                // GRID DE STATS GRANDES
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        Icons.fitness_center_rounded,
-                        '12',
-                        'Ejercicios',
-                        Color(0xFFFF7043),
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(
-                      child: _buildStatCard(
-                        Icons.timelapse_outlined,
-                        '1:20',
-                        'Horas',
-                        Color(0xFF4DD0E1),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 15),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        Icons.local_fire_department,
-                        '350',
-                        'Calorías',
-                        Color(0xFFFFD54F),
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(
-                      child: _buildStatCard(
-                        Icons.auto_graph,
-                        '-2kg',
-                        'Progreso',
-                        Color(0xFF66BB6A),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 30),
-
-                // ACCESOS RÁPIDOS
-                Text(
-                  'Accesos Rápidos',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-
-                SizedBox(height: 15),
-
-                _buildQuickAccessCard(
-                  '',
-                  'Reservar Maquina',
-                  'Vamos a ejercitar musculos.',
-                  Color(0xFFFFD54F),
-                ),
-/*
-                _buildQuickAccessCard(
-                  '',
-                  'Fotos de Progreso',
-                  'Ve cuánto has mejorado',
-                  Color(0xFFFF69B4),
-                ),
-
-                _buildQuickAccessCard(
-                  '',
-                  'Mis Objetivos',
-                  'Peso, tiempo, etc.',
-                  Color(0xFF4DD0E1),
-                ),
-*/
-                SizedBox(height: 100),
-              ],
-            ),
-          ),
-        ),
-      ),
-
-      /* bottomNavigationBar: _buildBottomNav(), */
-      bottomNavigationBar: CustomBottomNav(currentIndex: 0),  // 0 = Home
-    );
-  }
-
-  Widget _buildStatCard(IconData icon, String value, String label, Color color) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3), width: 2),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.2),
-            blurRadius: 10,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 40,
-          ),
-          SizedBox(height: 10),
-          SizedBox(height: 10),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey.shade600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQuickAccessCard(String emoji, String title, String subtitle, Color color) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () {
-            _showSimpleDialog('$emoji $title', 'Próximamente disponible');
-          },
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: color.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Text(emoji, style: TextStyle(fontSize: 28)),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 24),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-
-
-
-
-  void _showSimpleDialog(String title, String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(title, textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
-        content: Text(message, textAlign: TextAlign.center, style: TextStyle(fontSize: 16)),
-        actions: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFF69B4),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              ),
-              child: Text('¡Entendido!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
- */
-
-// lib/screens/home_screen.dart
-// lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../widgets/custom_bottom_nav.dart';
@@ -783,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           child: Text(
                             frases[_fraseActual]['texto']!,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 22,
                               fontWeight: FontWeight.w600,
                               color: Colors.brown.shade800,
                               height: 1.3,
@@ -801,23 +228,23 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 Text(
                   'Tus Logros',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
                 SizedBox(height: 8),
-                Text(
+                /*Text(
                   'Sigue así, estrella de mar',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 22,
                     color: Colors.grey.shade600,
                   ),
-                ),
+                ),*/
 
-                SizedBox(height: 25),
+                SizedBox(height: 12),
 
-                // GRID DE INSIGNIAS CON GRADIENTES (2x2)
+                // GRID DE INSIGNIAS (2x2)
                 Row(
                   children: [
                     Expanded(
@@ -874,13 +301,13 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 Text(
                   'Entrenar Ahora',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
 
-                SizedBox(height: 20),
+                SizedBox(height: 14),
 
                 // CARD GRANDE PARA IR A EJERCICIOS
                 Container(
@@ -926,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(width: 25),
+                            SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -934,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   Text(
                                     'Ver Ejercicios',
                                     style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 28,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
@@ -943,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   Text(
                                     'Elige tu ejercicio de hoy',
                                     style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 20,
                                       color: Colors.white.withOpacity(0.9),
                                     ),
                                   ),
@@ -1001,21 +428,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 SizedBox(height: 15),
 
-                /*
-                _buildQuickOption(
-                  '⚙️',
-                  'Ajustes',
-                  'Notificaciones y sonidos',
-                  [Color(0xFF9E9E9E), Color(0xFF757575)],
-                      () {
-                    _showSimpleDialog(
-                      '⚙️ Ajustes',
-                      'La pantalla de ajustes estará disponible próximamente',
-                    );
-                  },
-                ),
-
-                 */
                 _buildQuickOption(
                   '⚙️',
                   'Ajustes',
@@ -1085,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Text(
               valor,
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: desbloqueado ? Colors.white : Colors.grey.shade600,
               ),
@@ -1094,7 +506,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Text(
               label,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 22,
                 color: desbloqueado
                     ? Colors.white.withOpacity(0.9)
                     : Colors.grey.shade600,
@@ -1154,7 +566,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       Text(
                         titulo,
                         style: TextStyle(
-                          fontSize: 19,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -1163,7 +575,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       Text(
                         subtitulo,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           color: Colors.white.withOpacity(0.9),
                         ),
                       ),

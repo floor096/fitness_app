@@ -1,4 +1,3 @@
-// lib/screens/ajustes_screen.dart
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav.dart';
 
@@ -20,7 +19,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: Color(0xFFFF69B4), size: 30),
+          icon: Icon(Icons.close, color: Color(0xFFFF69B4), size: 32),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -28,7 +27,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
         title: Text(
           'Ajustes',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
@@ -83,6 +82,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
 
           Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
 
+          /*
           // IDIOMA (sin switch, solo navega)
           _buildAjusteItemSinSwitch(
             emoji: '🌐',
@@ -91,7 +91,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
             onTap: () {
               _mostrarDialogoIdioma();
             },
-          ),
+          ),*/
         ],
       ),
       bottomNavigationBar: CustomBottomNav(currentIndex: 0),
@@ -132,7 +132,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
             child: Text(
               titulo,
               style: TextStyle(
-                fontSize: 19,
+                fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
               ),
@@ -209,6 +209,7 @@ class _AjustesScreenState extends State<AjustesScreen> {
     );
   }
 
+  /*
   void _mostrarDialogoIdioma() {
     showDialog(
       context: context,
@@ -280,5 +281,5 @@ class _AjustesScreenState extends State<AjustesScreen> {
         ),
       ),
     );
-  }
+  }*/
 }

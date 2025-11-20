@@ -54,9 +54,9 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 40),
 
               Text(
-                'El cambio empieza aquí 💪',
+                'El cambio empieza aquí',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.pink.shade400,
                 ),
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
               Text(
                 'Entrena Patricio y sigue tu progreso fitness.',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 20,
                   color: Colors.grey[700],
                 ),
                 textAlign: TextAlign.center,
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                   child: const Text(
                     'INICIAR',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -101,9 +101,9 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               Text(
-                'Desarrollado para Patricio 💖',
+                'Desarrollado para Patricio',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 20,
                   color: Colors.grey[600],
                 ),
               ),

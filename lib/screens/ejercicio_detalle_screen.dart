@@ -39,7 +39,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
         title: Text(
           ejercicio['titulo'] ?? 'Ejercicio',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -89,19 +89,19 @@ class EjercicioDetalleScreen extends StatelessWidget {
                             Text(
                               ejercicio['titulo'] ?? 'Sin título',
                               style: TextStyle(
-                                fontSize: 26,
+                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            /* SizedBox(height: 5),
                             Text(
                               ejercicio['subtitulo'] ?? '',
                               style: TextStyle(
                                 fontSize: 17,
                                 color: Colors.grey.shade600,
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
                       ),
@@ -161,9 +161,9 @@ class EjercicioDetalleScreen extends StatelessWidget {
 
                   // INSTRUCCIONES
                   Text(
-                    '📝 Instrucciones',
+                    'Instrucciones',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -200,7 +200,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                               child: Text(
                                 '${index + 1}',
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -212,7 +212,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                             child: Text(
                               instruccion,
                               style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.black87,
                               ),
                             ),
@@ -239,13 +239,13 @@ class EjercicioDetalleScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Text('💪', style: TextStyle(fontSize: 35)),
-                        SizedBox(width: 15),
+                        /*Text('💪', style: TextStyle(fontSize: 35)),
+                        SizedBox(width: 15),*/
                         Expanded(
                           child: Text(
                             '¡Vamos Patricio! Tú puedes con esto',
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: Colors.brown.shade800,
                             ),
@@ -305,7 +305,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                               Text(
                                 'EMPEZAR',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                   letterSpacing: 1.2,
@@ -370,7 +370,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
           Text(
             valor,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
@@ -379,7 +379,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 18,
               color: Colors.grey.shade600,
             ),
             textAlign: TextAlign.center,

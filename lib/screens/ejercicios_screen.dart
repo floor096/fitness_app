@@ -67,7 +67,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
             Text(
               'Ejercicios Fáciles',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -98,7 +98,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
             Text(
               'Cargando ejercicios...',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 22,
                 color: Colors.grey.shade600,
               ),
             ),
@@ -175,16 +175,16 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                         Text(
                           '¡Bien hecho, Patricio!',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.brown.shade800,
                           ),
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Vas a ser la estrella más fuerte 💪',
+                          'Vas a ser la estrella más fuerte.',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                             color: Colors.brown.shade700,
                           ),
                         ),
@@ -206,7 +206,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                   Text(
                     'Elige tu Ejercicio',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -223,7 +223,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                     child: Text(
                       '${ejercicios.length} disponibles',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFFF69B4),
                       ),
@@ -233,7 +233,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 12),
 
             // LISTA DE EJERCICIOS DESDE FIRESTORE
             ...ejercicios.map((ejercicio) {
@@ -276,7 +276,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
       ) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      height: 160,
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -366,7 +366,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                 ),
               ),
 
-              // TEXTO
+              // TEXTO CARD
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(20),
@@ -377,7 +377,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -388,7 +388,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       Text(
                         subtitle,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 20,
                           color: Colors.grey.shade600,
                         ),
                       ),
@@ -402,7 +402,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                         child: Text(
                           '¡EMPEZAR!',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -419,35 +419,5 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
     );
   }
 
-  /*
-  void _showSimpleDialog(String title, String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(title, textAlign: TextAlign.center),
-        content: Text(message, textAlign: TextAlign.center),
-        actions: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFF69B4),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text('¡OK!', style: TextStyle(fontSize: 16)),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-   */
 
 }

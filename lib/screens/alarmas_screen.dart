@@ -1,4 +1,3 @@
-// lib/screens/alarmas_screen.dart
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav.dart';
 
@@ -14,7 +13,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
       'id': 1,
       'hora': '09:00',
       'titulo': 'Ejercicio Matutino',
-      'mensaje': '¡Buenos días, PATRICIO! Hora de mover esa estrella de mar',
+      //'mensaje': '¡Buenos días, PATRICIO! Hora de mover esa estrella de mar',
       'emoji': '',
       'activa': true,
       'dias': ['L', 'M', 'X', 'J', 'V'],
@@ -56,7 +55,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
             Text(
               'Mis Alarmas',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.brown.shade800,
               ),
@@ -100,12 +99,10 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                 ),
                 child: Column(
                   children: [
-                    Text('⏰', style: TextStyle(fontSize: 50)),
-                    SizedBox(height: 15),
                     Text(
                       '¡No te olvides, PATRICIO!',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.brown.shade800,
                       ),
@@ -115,7 +112,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                     Text(
                       'Las alarmas te ayudarán a recordar tus ejercicios',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 20,
                         color: Colors.brown.shade700,
                       ),
                       textAlign: TextAlign.center,
@@ -132,7 +129,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                   Text(
                     'Alarmas Activas',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -147,7 +144,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                     child: Text(
                       '${alarmas.where((a) => a['activa']).length}',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -198,7 +195,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                         Text(
                           'Agregar Nueva Alarma',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFFFF69B4),
                           ),
@@ -279,7 +276,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                     Text(
                       alarma['titulo'],
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: alarma['activa'] ? Colors.black87 : Colors.grey,
                       ),
@@ -312,7 +309,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
           ),
 
           SizedBox(height: 15),
-
+          /*
           // MENSAJE
           Container(
             padding: EdgeInsets.all(15),
@@ -336,7 +333,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                 ),
               ],
             ),
-          ),
+          ),*/
 
           SizedBox(height: 15),
 
@@ -370,7 +367,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
         child: Text(
           day,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: active ? Colors.white : Colors.grey.shade500,
           ),

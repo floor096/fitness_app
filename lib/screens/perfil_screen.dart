@@ -1,4 +1,3 @@
-// lib/screens/perfil_screen.dart
 import 'package:flutter/material.dart';
 import 'ejercicios_screen.dart';
 import 'home_screen.dart';
@@ -91,7 +90,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                       Text(
                         'Patricio Estrella',
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -130,14 +129,13 @@ class _PerfilScreenState extends State<PerfilScreen> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('⭐', style: TextStyle(fontSize: 24)),
                             SizedBox(width: 10),
                             Text(
                               'PRINCIPIANTE',
                               style: TextStyle(
                                 color: Colors.brown.shade800,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 22,
                               ),
                             ),
                           ],
@@ -160,7 +158,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   Text(
                     'Mi Progreso',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -196,7 +194,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   Text(
                     'Tus Fotos de Progreso',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -222,7 +220,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20),
                         onTap: () {
-                          _showSimpleDialog('📸 ¡Sonríe!', 'Aquí tomarás tu foto de progreso');
+                          _showSimpleDialog('¡Sonríe!', 'Aquí tomarás tu foto de progreso');
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +234,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                             Text(
                               'Tomar Foto de Progreso',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFFFF69B4),
                               ),
@@ -255,9 +253,6 @@ class _PerfilScreenState extends State<PerfilScreen> {
         ),
       ),
 
-      /* bottomNavigationBar: _buildBottomNav(),
-
-       */
       bottomNavigationBar: CustomBottomNav(currentIndex: 2),  //Perfil
     );
   }
@@ -325,7 +320,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 Text(
                   title.substring(2),
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 18,
                     color: Colors.grey.shade600,
                   ),
                 ),
@@ -333,7 +328,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 Text(
                   value,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
@@ -342,7 +337,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 Text(
                   subtitle,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 16,
                     color: Colors.grey.shade500,
                   ),
                 ),
@@ -353,54 +348,6 @@ class _PerfilScreenState extends State<PerfilScreen> {
       ),
     );
   }
-
-  /* Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onNavTap,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFFF69B4),
-        unselectedItemColor: Colors.grey,
-        selectedFontSize: 13,
-        unselectedFontSize: 12,
-        iconSize: 28,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
-            label: 'Ejercicios',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            label: 'Alarmas',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: 'Stats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
-      ),
-    );
-  }
-
-   */
 
   void _showSimpleDialog(String title, String message) {
     showDialog(
