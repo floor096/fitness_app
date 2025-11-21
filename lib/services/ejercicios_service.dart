@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 
 //para cargar ejercicios
 class EjerciciosService {
@@ -54,3 +54,5 @@ class EjerciciosService {
     }
   }
 }
+
+ */

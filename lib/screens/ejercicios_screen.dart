@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/custom_bottom_nav.dart';
@@ -60,10 +61,20 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
         backgroundColor: Color(0xFFFF69B4),
         elevation: 0,
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => HomeScreen(),
+                //transitionDuration: Duration.zero,
+              ),
+            );
+          },
+        ),
         title: Row(
           children: [
-            Icon(Icons.fitness_center, color: Colors.white, size: 28),
-            SizedBox(width: 10),
             Text(
               'Ejercicios Fáciles',
               style: TextStyle(
