@@ -14,30 +14,10 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
       'hora': '09:00',
       'titulo': 'Ejercicio Matutino',
       //'mensaje': '¡Buenos días, PATRICIO! Hora de mover esa estrella de mar',
-      'emoji': '',
+      //'emoji': '',
       'activa': true,
       'dias': ['L', 'M', 'X', 'J', 'V'],
-    },
-    /*{
-      'id': 2,
-      'hora': '14:00',
-      'titulo': 'Pausa del Almuerzo',
-      'mensaje': '¡Pausa del helado! 5 minutos de ejercicio',
-      'emoji': '🍦',
-      'activa': true,
-      'dias': ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
-    },
-    {
-      'id': 3,
-      'hora': '21:00',
-      'titulo': 'Estiramiento Nocturno',
-      'mensaje': 'Estiramiento antes de dormir bajo tu roca',
-      'emoji': '🌙',
-      'activa': false,
-      'dias': ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
-    },
-
-     */
+    }
   ];
 
   @override
@@ -307,33 +287,6 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
               ),
             ],
           ),
-
-          SizedBox(height: 15),
-          /*
-          // MENSAJE
-          Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.message, size: 20, color: Colors.grey.shade600),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    alarma['mensaje'],
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade700,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),*/
 
           SizedBox(height: 15),
 

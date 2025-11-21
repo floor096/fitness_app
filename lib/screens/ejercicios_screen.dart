@@ -1,8 +1,8 @@
-import 'package:fitness_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/custom_bottom_nav.dart';
 import 'ejercicio_detalle_screen.dart';
+import 'home_screen.dart';
 
 class EjerciciosScreen extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
       setState(() {
         ejercicios = snapshot.docs.map((doc) {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-          data['id'] = doc.id; // Agregar el id del documento
+          data['id'] = doc.id;
           return data;
         }).toList();
         isLoading = false;
@@ -43,13 +43,32 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
         isLoading = false;
       });
 
-      // mostrar mensaje al usuario
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error al cargar ejercicios'),
           backgroundColor: Colors.red,
         ),
       );
+    }
+  }
+
+  // Convierte string a IconData
+  IconData _getIcon(String? iconName) {
+    switch (iconName?.toLowerCase()) {
+      case 'run':
+      case 'cardio':
+        return Icons.directions_run;
+      case 'yoga':
+      case 'estiramiento':
+        return Icons.self_improvement;
+      case 'strength':
+      case 'fuerza':
+        return Icons.fitness_center;
+      case 'walk':
+      case 'caminar':
+        return Icons.directions_walk;
+      default:
+        return Icons.fitness_center;
     }
   }
 
@@ -68,22 +87,18 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation1, animation2) => HomeScreen(),
-                //transitionDuration: Duration.zero,
+                transitionDuration: Duration.zero,
               ),
             );
           },
         ),
-        title: Row(
-          children: [
-            Text(
-              'Ejercicios Fáciles',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
+        title: Text(
+          'Ejercicios Fáciles',
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         actions: [
           IconButton(
@@ -109,7 +124,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
             Text(
               'Cargando ejercicios...',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 20,
                 color: Colors.grey.shade600,
               ),
             ),
@@ -121,12 +136,16 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('😢', style: TextStyle(fontSize: 80)),
+            Icon(
+              Icons.sentiment_dissatisfied,
+              size: 80,
+              color: Colors.grey.shade400,
+            ),
             SizedBox(height: 20),
             Text(
               'No hay ejercicios disponibles',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade700,
               ),
@@ -135,15 +154,18 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
             Text(
               'Agrega ejercicios en Firestore',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.grey.shade600,
               ),
             ),
             SizedBox(height: 30),
             ElevatedButton.icon(
               onPressed: _cargarEjercicios,
-              icon: Icon(Icons.refresh),
-              label: Text('Reintentar'),
+              icon: Icon(Icons.refresh, size: 24),
+              label: Text(
+                'Reintentar',
+                style: TextStyle(fontSize: 18),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFF69B4),
                 padding: EdgeInsets.symmetric(
@@ -177,7 +199,11 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
               ),
               child: Row(
                 children: [
-                  Text('🌟', style: TextStyle(fontSize: 40)),
+                  Icon(
+                    Icons.star,
+                    size: 45,
+                    color: Colors.brown.shade800,
+                  ),
                   SizedBox(width: 15),
                   Expanded(
                     child: Column(
@@ -193,9 +219,9 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Vas a ser la estrella más fuerte.',
+                          'Vas a ser la estrella más fuerte',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colors.brown.shade700,
                           ),
                         ),
@@ -217,7 +243,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                   Text(
                     'Elige tu Ejercicio',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -244,17 +270,11 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
               ),
             ),
 
-            SizedBox(height: 12),
+            SizedBox(height: 20),
 
             // LISTA DE EJERCICIOS DESDE FIRESTORE
             ...ejercicios.map((ejercicio) {
-              return _buildBigCategoryCard(
-                ejercicio['emoji'] ?? '💪',
-                ejercicio['titulo'] ?? 'Sin título',
-                ejercicio['subtitulo'] ?? 'Sin descripción',
-                _parseColor(ejercicio['color']),
-                ejercicio['imagenUrl'] ?? '',
-              );
+              return _buildBigCategoryCard(ejercicio);
             }).toList(),
 
             SizedBox(height: 100),
@@ -267,27 +287,27 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
 
   Color _parseColor(String? colorString) {
     if (colorString == null || colorString.isEmpty) {
-      return Color(0xFFFF69B4); // Color por defecto
+      return Color(0xFFFF69B4);
     }
 
     try {
-      // Convierte "#4DD0E1" a Color
       return Color(int.parse(colorString.replaceFirst('#', '0xFF')));
     } catch (e) {
-      return Color(0xFFFF69B4); // Color por defecto si falla
+      return Color(0xFFFF69B4);
     }
   }
 
-  Widget _buildBigCategoryCard(
-      String emoji,
-      String title,
-      String subtitle,
-      Color color,
-      String imageUrl,
-      ) {
+  Widget _buildBigCategoryCard(Map<String, dynamic> ejercicio) {
+    String iconName = ejercicio['iconName'] ?? '';
+    String titulo = ejercicio['titulo'] ?? 'Sin título';
+    String subtitulo = ejercicio['subtitulo'] ?? 'Sin descripción';
+    Color color = _parseColor(ejercicio['color']);
+    String imagenUrl = ejercicio['imagenUrl'] ?? '';
+    IconData icon = _getIcon(iconName);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      height: 200,
+      height: 180,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -305,28 +325,25 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => EjercicioDetalleScreen(
-                  ejercicio: ejercicios.firstWhere(
-                        (e) => e['titulo'] == title,
-                    orElse: () => {},
-                  ),
+                  ejercicio: ejercicio,
                 ),
               ),
             );
           },
           child: Row(
             children: [
-              // IMAGEN O EMOJI
+              // IMAGEN O ICONO
               ClipRRect(
                 borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
                 child: Container(
-                  width: 140,
+                  width: 120,
                   height: double.infinity,
-                  child: imageUrl.isNotEmpty
+                  child: imagenUrl.isNotEmpty
                       ? Stack(
                     fit: StackFit.expand,
                     children: [
                       Image.network(
-                        imageUrl,
+                        imagenUrl,
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
@@ -343,9 +360,10 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                           return Container(
                             color: color.withOpacity(0.3),
                             child: Center(
-                              child: Text(
-                                emoji,
-                                style: TextStyle(fontSize: 60),
+                              child: Icon(
+                                icon,
+                                size: 60,
+                                color: Colors.white,
                               ),
                             ),
                           );
@@ -368,16 +386,17 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       : Container(
                     color: color.withOpacity(0.3),
                     child: Center(
-                      child: Text(
-                        emoji,
-                        style: TextStyle(fontSize: 60),
+                      child: Icon(
+                        icon,
+                        size: 60,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
 
-              // TEXTO CARD
+              // TEXTO
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(20),
@@ -386,9 +405,9 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        title,
+                        titulo,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -397,7 +416,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        subtitle,
+                        subtitulo,
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.grey.shade600,
@@ -405,7 +424,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                       ),
                       SizedBox(height: 12),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                         decoration: BoxDecoration(
                           color: color,
                           borderRadius: BorderRadius.circular(20),
@@ -413,7 +432,7 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                         child: Text(
                           '¡EMPEZAR!',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -429,6 +448,4 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
       ),
     );
   }
-
-
 }

@@ -19,12 +19,33 @@ class EjercicioDetalleScreen extends StatelessWidget {
     }
   }
 
+  // convertir iconos
+  IconData _getIcon(String? iconName) {
+    switch (iconName?.toLowerCase()) {
+      case 'run':
+      case 'cardio':
+        return Icons.directions_run;
+      case 'yoga':
+      case 'estiramiento':
+        return Icons.self_improvement;
+      case 'strength':
+      case 'fuerza':
+        return Icons.fitness_center;
+      case 'walk':
+      case 'caminar':
+        return Icons.directions_walk;
+      default:
+        return Icons.fitness_center;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Color colorPrincipal = _parseColor(ejercicio['color']);
     String imagenUrl = ejercicio['imagenUrl'] ?? '';
     String gifUrl = ejercicio['gifUrl'] ?? '';
-    String emoji = ejercicio['emoji'] ?? '💪';
+    String iconName = ejercicio['iconName'] ?? '';
+    IconData iconoPrincipal = _getIcon(iconName);
     List<dynamic> instrucciones = ejercicio['instrucciones'] ?? [];
 
     return Scaffold(
@@ -60,10 +81,10 @@ class EjercicioDetalleScreen extends StatelessWidget {
                 gifUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return _buildImagenFallback(imagenUrl, emoji, colorPrincipal);
+                  return _buildImagenFallback(imagenUrl, iconoPrincipal, colorPrincipal);
                 },
               )
-                  : _buildImagenFallback(imagenUrl, emoji, colorPrincipal),
+                  : _buildImagenFallback(imagenUrl, iconoPrincipal, colorPrincipal),
             ),
 
             SizedBox(height: 25),
@@ -74,12 +95,20 @@ class EjercicioDetalleScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // TITULO Y EMOJI
+                  // TITULO Y ICONO
                   Row(
                     children: [
-                      Text(
-                        emoji,
-                        style: TextStyle(fontSize: 40),
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: colorPrincipal.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Icon(
+                          iconoPrincipal,
+                          size: 40,
+                          color: colorPrincipal,
+                        ),
                       ),
                       SizedBox(width: 15),
                       Expanded(
@@ -94,14 +123,6 @@ class EjercicioDetalleScreen extends StatelessWidget {
                                 color: Colors.black87,
                               ),
                             ),
-                            /* SizedBox(height: 5),
-                            Text(
-                              ejercicio['subtitulo'] ?? '',
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),*/
                           ],
                         ),
                       ),
@@ -115,7 +136,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: _buildStatCard(
-                          '⏱️',
+                          Icons.timer,
                           '${ejercicio['duracion'] ?? 5} min',
                           'Duración',
                           Color(0xFF4DD0E1),
@@ -124,8 +145,8 @@ class EjercicioDetalleScreen extends StatelessWidget {
                       SizedBox(width: 15),
                       Expanded(
                         child: _buildStatCard(
-                          '🔁',
-                          '${ejercicio['repeticiones'] ?? 10}',
+                          Icons.repeat,
+                          '${ejercicio['repeticiones']}',
                           'Repeticiones',
                           Color(0xFFFF9800),
                         ),
@@ -139,7 +160,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: _buildStatCard(
-                          '⭐',
+                          Icons.stars,
                           '+${ejercicio['puntos'] ?? 20}',
                           'Puntos',
                           Color(0xFFFFD700),
@@ -148,7 +169,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                       SizedBox(width: 15),
                       Expanded(
                         child: _buildStatCard(
-                          '🎯',
+                          Icons.category,
                           ejercicio['categoria'] ?? 'Ejercicio',
                           'Categoría',
                           colorPrincipal,
@@ -239,8 +260,12 @@ class EjercicioDetalleScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        /*Text('💪', style: TextStyle(fontSize: 35)),
-                        SizedBox(width: 15),*/
+                        Icon(
+                          Icons.emoji_events,
+                          size: 35,
+                          color: Colors.brown.shade800,
+                        ),
+                        SizedBox(width: 15),
                         Expanded(
                           child: Text(
                             '¡Vamos Patricio! Tú puedes con esto',
@@ -303,7 +328,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                               ),
                               SizedBox(width: 10),
                               Text(
-                                'EMPEZAR',
+                                'COMIENZA YA',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -328,7 +353,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildImagenFallback(String imagenUrl, String emoji, Color color) {
+  Widget _buildImagenFallback(String imagenUrl, IconData icono, Color color) {
     if (imagenUrl.isNotEmpty) {
       return Image.network(
         imagenUrl,
@@ -341,23 +366,23 @@ class EjercicioDetalleScreen extends StatelessWidget {
         },
         errorBuilder: (context, error, stackTrace) {
           return Center(
-            child: Text(emoji, style: TextStyle(fontSize: 120)),
+            child: Icon(icono, size: 120, color: color),
           );
         },
       );
     } else {
       return Center(
-        child: Text(emoji, style: TextStyle(fontSize: 120)),
+        child: Icon(icono, size: 120, color: color),
       );
     }
   }
 
-  Widget _buildStatCard(String emoji, String valor, String label, Color color) {
+  Widget _buildStatCard(IconData icono, String valor, String label, Color color) {
     return Container(
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(100),
         border: Border(
           bottom: BorderSide(color: color.withOpacity(0.5), width: 3),
           right: BorderSide(color: color.withOpacity(0.5), width: 3),
@@ -365,7 +390,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(emoji, style: TextStyle(fontSize: 28)),
+          Icon(icono, size: 30, color: color),
           SizedBox(height: 8),
           Text(
             valor,
@@ -379,7 +404,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               color: Colors.grey.shade600,
             ),
             textAlign: TextAlign.center,
@@ -394,10 +419,16 @@ class EjercicioDetalleScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        title: Text(
-          '🚧 Próximamente',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.construction, color: Color(0xFFFF9800), size: 30),
+            SizedBox(width: 10),
+            Text(
+              'Próximamente',
+              style: TextStyle(fontSize: 24),
+            ),
+          ],
         ),
         content: Text(
           'La pantalla de ejercicio activo estará disponible pronto',
@@ -417,7 +448,11 @@ class EjercicioDetalleScreen extends StatelessWidget {
               ),
               child: Text(
                 '¡Entendido!',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
