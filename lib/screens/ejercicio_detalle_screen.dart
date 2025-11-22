@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ejercicio_activo_screen.dart';
+
 class EjercicioDetalleScreen extends StatelessWidget {
   final Map<String, dynamic> ejercicio;
 
@@ -129,7 +131,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(height: 25),
+                  SizedBox(height: 20),
 
                   // STATS EN CARDS
                   Row(
@@ -315,7 +317,14 @@ class EjercicioDetalleScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25),
                         onTap: () {
                           // A ejercicio_activo_screen
-                          _mostrarDialogoProximamente(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EjercicioActivoScreen(
+                                ejercicio: ejercicio,
+                              ),
+                            ),
+                          );
                         },
                         child: Center(
                           child: Row(
@@ -328,7 +337,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
                               ),
                               SizedBox(width: 10),
                               Text(
-                                'COMIENZA YA',
+                                'SIGUIENTE',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -414,6 +423,7 @@ class EjercicioDetalleScreen extends StatelessWidget {
     );
   }
 
+  /*
   void _mostrarDialogoProximamente(BuildContext context) {
     showDialog(
       context: context,
@@ -460,4 +470,5 @@ class EjercicioDetalleScreen extends StatelessWidget {
       ),
     );
   }
+  */
 }
