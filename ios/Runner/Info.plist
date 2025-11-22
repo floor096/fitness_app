@@ -45,5 +45,20 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+
+	<key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+        <string>fetch</string>
+    </array>
+
+    <key>NSUserNotificationUsageDescription</key>
+    <string>La app necesita enviar notificaciones para recordarte tus ejercicios.</string>
+
+    <key>NSCalendarsUsageDescription</key>
+    <string>Accedo al calendario para programar alarmas.</string>
+
+
 </dict>
 </plist>

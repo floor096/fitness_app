@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/custom_bottom_nav.dart';
+import '../../widgets/custom_bottom_nav.dart';
 
 class AlarmasScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
       'hora': '09:00',
       'titulo': 'Ejercicio Matutino',
       //'mensaje': '¡Buenos días, PATRICIO! Hora de mover esa estrella de mar',
-      //'emoji': '',
+      'emoji': '',
       'activa': true,
       'dias': ['L', 'M', 'X', 'J', 'V'],
     }

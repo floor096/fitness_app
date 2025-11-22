@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../widgets/custom_bottom_nav.dart';
-import 'ejercicios_screen.dart';
+import 'ejercicios/ejercicios_screen.dart';
 import 'perfil_screen.dart';
-import 'alarmas_screen.dart';
+import 'alarmas/alarmas_screen.dart';
 import 'ajustes_screen.dart';
 
 class HomeScreen extends StatefulWidget {

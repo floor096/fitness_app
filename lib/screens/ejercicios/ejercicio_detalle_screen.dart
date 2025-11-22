@@ -330,12 +330,6 @@ class EjercicioDetalleScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.play_arrow,
-                                size: 35,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 10),
                               Text(
                                 'SIGUIENTE',
                                 style: TextStyle(
@@ -344,6 +338,12 @@ class EjercicioDetalleScreen extends StatelessWidget {
                                   color: Colors.white,
                                   letterSpacing: 1.2,
                                 ),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(
+                                Icons.arrow_forward,
+                                size: 35,
+                                color: Colors.white,
                               ),
                             ],
                           ),
@@ -423,52 +423,4 @@ class EjercicioDetalleScreen extends StatelessWidget {
     );
   }
 
-  /*
-  void _mostrarDialogoProximamente(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.construction, color: Color(0xFFFF9800), size: 30),
-            SizedBox(width: 10),
-            Text(
-              'Próximamente',
-              style: TextStyle(fontSize: 24),
-            ),
-          ],
-        ),
-        content: Text(
-          'La pantalla de ejercicio activo estará disponible pronto',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18),
-        ),
-        actions: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFF69B4),
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text(
-                '¡Entendido!',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-  */
 }

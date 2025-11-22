@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../widgets/custom_bottom_nav.dart';
+import '../../widgets/custom_bottom_nav.dart';
 import 'ejercicio_detalle_screen.dart';
-import 'home_screen.dart';
+import '../home_screen.dart';
 
 class EjerciciosScreen extends StatefulWidget {
   @override

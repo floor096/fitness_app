@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ejercicios_screen.dart';
+import 'ejercicios/ejercicios_screen.dart';
 import 'home_screen.dart';
 import '../widgets/custom_bottom_nav.dart';
 
