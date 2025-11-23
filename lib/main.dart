@@ -1,57 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-// Notificaciones
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+// Alarmas
+import 'package:alarm/alarm.dart';
 
+// Servicios
+import 'services/alarmas_service.dart';
+
+// Pantallas
 import 'screens/login_screen.dart';
 
-// Instancia global
-final FlutterLocalNotificationsPlugin notificationsPlugin =
-FlutterLocalNotificationsPlugin();
-
 Future<void> main() async {
-  //asegura que los widgets esten inicializados antes de firebase
+  // Asegura que los widgets estén inicializados antes de Firebase
   WidgetsFlutterBinding.ensureInitialized();
 
-  //Inicializa Firebase
+  // Orientación de pantalla (opcional - solo portrait)
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  // 1. Inicializar Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Inicializa Timezones (para alarmas exactas)
-  tz.initializeTimeZones();
+  // 2. Inicializar Alarm
+  await Alarm.init();
 
-  // configuracion de inicializacion para Android
-  const AndroidInitializationSettings androidSettings =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  // configuracion de inicializacion para iOS
-  const DarwinInitializationSettings iosSettings =
-  DarwinInitializationSettings(
-    requestAlertPermission: true,
-    requestBadgePermission: true,
-    requestSoundPermission: true,
-  );
-
-  // combinar configuraciones
-  const InitializationSettings initSettings = InitializationSettings(
-    android: androidSettings,
-    iOS: iosSettings,
-  );
-
-  // inicializar notificaciones
-  await notificationsPlugin.initialize(
-    initSettings,
-  );
-
-  //  permisos en Android 13+
-  // await notificationsPlugin.resolvePlatformSpecificImplementation
-  //AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
-
+  // 3. Reprogramar alarmas guardadas (importante!)
+  final alarmasService = AlarmasService();
+  await alarmasService.reprogramarAlarmasGuardadas();
 
   runApp(MyApp());
 }
@@ -61,7 +42,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fitness Patricio',
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        useMaterial3: true,
+      ),
       home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
