@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'ejercicios/ejercicios_screen.dart';
 import 'home_screen.dart';
 import '../widgets/custom_bottom_nav.dart';
+import '../widgets/galeria_fotos_progreso.dart';
 
 class PerfilScreen extends StatefulWidget {
   @override
@@ -10,7 +11,6 @@ class PerfilScreen extends StatefulWidget {
 
 class _PerfilScreenState extends State<PerfilScreen> {
   int _selectedIndex = 4;
-
 
   @override
   Widget build(BuildContext context) {
@@ -190,60 +190,8 @@ class _PerfilScreenState extends State<PerfilScreen> {
 
                   SizedBox(height: 30),
 
-                  // FOTOS DE PROGRESO - MUY SIMPLE
-                  Text(
-                    'Tus Fotos de Progreso',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-
-                  SizedBox(height: 15),
-
-                  // Botón GRANDE para tomar foto
-                  Container(
-                    width: double.infinity,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Color(0xFFFF69B4),
-                        width: 3,
-                        style: BorderStyle.solid,
-                      ),
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(20),
-                        onTap: () {
-                          _showSimpleDialog('¡Sonríe!', 'Aquí tomarás tu foto de progreso');
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_a_photo,
-                              size: 50,
-                              color: Color(0xFFFF69B4),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'Tomar Foto de Progreso',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFFF69B4),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // FOTOS DE PROGRESO
+                  GaleriaFotosProgreso(),
 
                   SizedBox(height: 100),
                 ],
@@ -253,7 +201,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
         ),
       ),
 
-      bottomNavigationBar: CustomBottomNav(currentIndex: 2),  //Perfil
+      bottomNavigationBar: CustomBottomNav(currentIndex: 2), //Perfil
     );
   }
 
