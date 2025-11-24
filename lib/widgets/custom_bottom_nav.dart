@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
-import '../screens/progreso_screen.dart';
+import '../screens/recompensas_screen.dart';
 import '../screens/perfil_screen.dart';
 
 const Color primaryColor = Color(0xFFFF69B4);
@@ -23,7 +23,7 @@ class CustomBottomNav extends StatelessWidget {
         screen = HomeScreen();
         break;
       case 1:
-        screen = ProgresoScreen();
+        screen = RecompensasScreen();
         break;
       case 2:
         screen = PerfilScreen();
