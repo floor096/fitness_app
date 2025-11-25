@@ -227,7 +227,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
                 texto,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -240,7 +240,8 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
 
   Widget _buildEstadoVacio() {
     return Container(
-      padding: EdgeInsets.all(40),
+      width: double.infinity,
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -249,11 +250,11 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
       child: Column(
         children: [
           Icon(Icons.photo_camera, size: 60, color: Colors.grey.shade400),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
           Text(
             'Aún no tienes fotos',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Colors.grey.shade700,
             ),
@@ -263,7 +264,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
             '¡Empieza a documentar tu progreso!',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 20,
               color: Colors.grey.shade500,
             ),
           ),

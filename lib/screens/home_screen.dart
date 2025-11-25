@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../services/servicio_almacenamiento_fotos.dart';
 import '../widgets/custom_bottom_nav.dart';
 import 'ejercicios/ejercicios_screen.dart';
 import 'perfil_screen.dart';
@@ -44,6 +45,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+
+    // Sincronizar fotos con Supabase al iniciar la app
+    ServicioAlmacenamientoFotos().sincronizarConSupabase();
 
     // Animación de "respiración" para Patricio
     _breathController = AnimationController(
