@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ejercicios/ejercicios_screen.dart';
-import 'home_screen.dart';
+import 'home/home_screen.dart';
 import '../widgets/custom_bottom_nav.dart';
 import '../widgets/galeria_fotos_progreso.dart';
 

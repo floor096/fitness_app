@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/home_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/recompensas_screen.dart';
 import '../screens/perfil_screen.dart';
 
