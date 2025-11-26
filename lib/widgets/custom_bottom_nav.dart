@@ -13,7 +13,7 @@ class CustomBottomNav extends StatelessWidget {
     required this.currentIndex,
   }) : super(key: key);
 
-  // funcion de navegación
+  // Función de navegación CORREGIDA
   void _onNavTap(BuildContext context, int index) {
     if (index == currentIndex) return;
 
@@ -32,13 +32,16 @@ class CustomBottomNav extends StatelessWidget {
         return;
     }
 
-    // Usamos pushReplacement para evitar acumular pantallas en la pila,
-    // y Duration.zero para una transición instantánea (sin animaciones que confundan a Patricio)
+    // SOLUCIÓN: Usamos PageRouteBuilder pero desactivamos Hero
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, anim1, anim2) => screen,
+        pageBuilder: (context, anim1, anim2) => HeroMode(
+          enabled: false,  // ← ESTO SOLUCIONA EL ERROR
+          child: screen,
+        ),
         transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
       ),
     );
   }
@@ -54,7 +57,7 @@ class CustomBottomNav extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: primaryColor,
+            color: primaryColor.withOpacity(0.3),
             blurRadius: 20,
             spreadRadius: 2,
           ),
@@ -70,11 +73,11 @@ class CustomBottomNav extends StatelessWidget {
           onTap: (index) => _onNavTap(context, index),
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
-          selectedItemColor: primaryColor, // Rosa
+          selectedItemColor: primaryColor,
           unselectedItemColor: Colors.grey,
           selectedFontSize: 20,
           unselectedFontSize: 20,
-          iconSize: 40, // Iconos más grandes
+          iconSize: 40,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded),
@@ -94,4 +97,3 @@ class CustomBottomNav extends StatelessWidget {
     );
   }
 }
-

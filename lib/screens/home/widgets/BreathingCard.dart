@@ -17,7 +17,7 @@ class BreathingCard extends StatelessWidget {
           scale: breathAnimation.value,
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xFFFF69B4), Color(0xFFE91E63)],
@@ -50,19 +50,19 @@ class BreathingCard extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Hola soy Patricio',
+                  'Hola Patricio',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 8),
                 Text(
                   '¿Listo para ejercitar hoy?',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
                     color: Colors.white.withOpacity(0.95),
                   ),
                   textAlign: TextAlign.center,

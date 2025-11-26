@@ -48,12 +48,12 @@ class _PerfilScreenState extends State<PerfilScreen> {
                         ),
                       ],
                     ),
-                    child: IconButton(
+                    /*child: IconButton(
                       icon: Icon(Icons.settings, color: Color(0xFFFF69B4)),
                       onPressed: () {
                         _showSimpleDialog(' Configuración', 'Aquí irán los ajustes');
                       },
-                    ),
+                    ),*/
                   ),
                 ),
 

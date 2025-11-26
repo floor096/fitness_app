@@ -20,10 +20,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   late AnimationController _breathController;
   late Animation<double> _breathAnimation;
-  late Timer _fraseTimer;
+  //late Timer _fraseTimer;
   int _fraseActual = 0;
-
-
 
 
   @override
@@ -54,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void dispose() {
     _breathController.dispose();
-    _fraseTimer.cancel();
+    //_fraseTimer.cancel();
     super.dispose();
   }
 
@@ -73,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 // SALUDO GRANDE
                 Text(
-                  '¡Hola Patricio!',
+                  '¡Bienvenido!',
                   style: TextStyle(
                     fontSize: 34,
                     fontWeight: FontWeight.bold,
@@ -84,12 +82,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 Text(
                   'Hoy es un buen día para ejercitar',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
                     color: Colors.grey.shade600,
                   ),
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: 15),
 
                 // PATRICIO ANIMADO CON ILUSTRACIÓN
                 BreathingCard(breathAnimation: _breathAnimation),
@@ -119,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),*/
 
-                SizedBox(height: 12),
+                //SizedBox(height: 12),
 
                 // GRID DE INSIGNIAS (2x2)
                 Row(
@@ -226,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   },
                 ),
 
-                SizedBox(height: 15),
+                /*SizedBox(height: 15),
 
                 QuickOption(
                   emoji: '⚙️',
@@ -241,7 +239,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   },
                 ),
 
-                SizedBox(height: 100),
+                 */
+
+                SizedBox(height: 80),
               ],
             ),
           ),
