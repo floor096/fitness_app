@@ -90,14 +90,14 @@ class _PerfilScreenState extends State<PerfilScreen> {
                       Text(
                         'Patricio Estrella',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 36,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
 
                       SizedBox(height: 25),
-
+                      /*
                       // Stats en fila (GRANDES)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +108,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                         ],
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 20),*/
 
                       // Badge de nivel MUY VISIBLE
                       Container(
@@ -135,7 +135,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                               style: TextStyle(
                                 color: Colors.brown.shade800,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 22,
+                                fontSize: 26,
                               ),
                             ),
                           ],
@@ -147,7 +147,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
               ],
             ),
 
-            SizedBox(height: 320),
+            SizedBox(height: 180),
 
             // SECCIÓN SIMPLE DE MI PROGRESO
             Padding(
@@ -155,7 +155,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  /*Text(
                     'Mi Progreso',
                     style: TextStyle(
                       fontSize: 28,
@@ -186,9 +186,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     'Estiramientos',
                     'Lo que más haces',
                     Color(0xFF66BB6A),
-                  ),
+                  ),*/
 
-                  SizedBox(height: 30),
+                  SizedBox(height: 50),
 
                   // FOTOS DE PROGRESO
                   GaleriaFotosProgreso(),

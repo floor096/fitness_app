@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Hoy es un buen día para ejercitar',
+                  'Hoy es un buen día.',
                   style: TextStyle(
                     fontSize: 22,
                     color: Colors.grey.shade600,
@@ -99,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 SizedBox(height: 40),
 
+                /*
                 // TÍTULO DE SECCIÓN
                 Text(
                   'Tus Logros',
@@ -170,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ],
                 ),
 
-                SizedBox(height: 40),
+                SizedBox(height: 40),*/
 
                 // ENTRENAR AHORA
                 Text(

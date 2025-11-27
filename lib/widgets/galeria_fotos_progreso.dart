@@ -150,13 +150,13 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
         Text(
           'Tus Fotos de Progreso',
           style: TextStyle(
-            fontSize: 28,
+            fontSize: 29,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
         ),
 
-        SizedBox(height: 10),
+        SizedBox(height: 20),
 
         // Botones para agregar foto
         Row(
@@ -169,7 +169,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
                 _tomarFotoConCamara,
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 20),
             Expanded(
               child: _buildBotonAgregarConIcono(
                 'Galería',
@@ -201,7 +201,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
 
   Widget _buildBotonAgregarConIcono(String texto, IconData icono, Color color, VoidCallback onTap) {
     return Container(
-      height: 60,
+      height: 80,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(15),
@@ -221,13 +221,13 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icono, color: Colors.white, size: 24),
+              Icon(icono, color: Colors.white, size: 28),
               SizedBox(width: 8),
               Text(
                 texto,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -279,7 +279,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 15,
+        crossAxisSpacing: 8,
         mainAxisSpacing: 15,
         childAspectRatio: 0.75,
       ),
@@ -303,7 +303,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
+              blurRadius: 8,
               offset: Offset(0, 5),
             ),
           ],
@@ -332,7 +332,7 @@ class _GaleriaFotosProgresoState extends State<GaleriaFotosProgreso> {
                 formatoFecha.format(foto.fecha),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFFFF69B4),
                 ),
