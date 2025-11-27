@@ -124,7 +124,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNav(currentIndex: 2),
+      bottomNavigationBar: CustomBottomNav(currentIndex: 0),
     );
   }
 
@@ -226,7 +226,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                     Text(
                       alarma["hora"],
                       style: TextStyle(
-                        fontSize: 32,
+                        fontSize: 34,
                         fontWeight: FontWeight.bold,
                         color: alarma["activa"] ? Colors.black87 : Colors.grey,
                       ),
@@ -235,7 +235,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
                     Text(
                       alarma["titulo"],
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 24,
                         fontWeight: FontWeight.w600,
                         color: alarma["activa"] ? Colors.black87 : Colors.grey,
                       ),
@@ -259,9 +259,9 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
               // Botón de eliminar
               IconButton(
                 icon: Icon(
-                  Icons.delete_outline,
+                  Icons.delete,
                   color: Colors.red.withOpacity(0.7),
-                  size: 28,
+                  size: 30,
                 ),
                 onPressed: () => _confirmarEliminarAlarma(alarma),
               ),
@@ -396,7 +396,7 @@ class _AlarmasScreenState extends State<AlarmasScreen> {
         child: Text(
           dia,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: activa ? Colors.white : Colors.grey.shade500,
           ),

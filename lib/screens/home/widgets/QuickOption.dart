@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QuickOption extends StatelessWidget {
-  final String emoji;
+  final IconData icon;
   final String titulo;
   final String subtitulo;
   final List<Color> gradient;
@@ -9,7 +9,7 @@ class QuickOption extends StatelessWidget {
 
   const QuickOption({
     super.key,
-    required this.emoji,
+    required this.icon,
     required this.titulo,
     required this.subtitulo,
     required this.gradient,
@@ -46,7 +46,11 @@ class QuickOption extends StatelessWidget {
                     color: Colors.white.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Text(emoji, style: const TextStyle(fontSize: 32)),
+                  child:  Icon(
+                    icon, // Cambio de Text a Icon
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
@@ -56,7 +60,7 @@ class QuickOption extends StatelessWidget {
                       Text(
                         titulo,
                         style: const TextStyle(
-                          fontSize: 24,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -65,7 +69,7 @@ class QuickOption extends StatelessWidget {
                       Text(
                         subtitulo,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           color: Colors.white.withOpacity(0.9),
                         ),
                       ),

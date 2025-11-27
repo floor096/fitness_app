@@ -192,10 +192,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 // ACCESOS RÁPIDOS
                 QuickOption(
-                  emoji: '📸',
+                  icon: Icons.camera_alt,
                   titulo: 'Ver mi Progreso',
                   subtitulo: 'Fotos antes y después',
-                  gradient: [Color(0xFFFFB6D9), Color(0xFFFF69B4)],
+                  gradient: [Color(0xFF26C6DA), Color(0xFF00ACC1)],
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
@@ -210,10 +210,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 SizedBox(height: 15),
 
                 QuickOption(
-                  emoji: '⏰',
+                  icon: Icons.alarm_add,
                   titulo: 'Mis Alarmas',
                   subtitulo: 'Recordatorios de ejercicio',
-                  gradient: [Color(0xFFFFD93D), Color(0xFFFFB74D)],
+                  gradient: [Color(0xFF9CCC65), Color(0xFF7CB342)],
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
